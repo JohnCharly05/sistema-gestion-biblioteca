@@ -369,8 +369,8 @@ btnimprimir.setBackground(new Color(204, 204, 204));        // TODO add your han
         Document documento = new Document();
         try {
             
-            //String ruta = System.getProperty("user.home");
-            String ruta ="C:\\Users\\jccam\\OneDrive\\Escritorio";
+            String ruta = System.getProperty("user.home");
+            //String ruta ="C:";
             PdfWriter.getInstance(documento, new FileOutputStream(ruta+ "/Reporte.pdf"));
             documento.open();
             //documento.add(new Paragraph("Hola"));
