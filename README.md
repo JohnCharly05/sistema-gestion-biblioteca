@@ -26,9 +26,45 @@ Aplicación de escritorio robusta con arquitectura cliente-servidor desarrollada
 
 ---
 
-## ⚙️ Instalación y Configuración
-Para ejecutar este proyecto de manera local, sigue estos pasos:
+## ⚙️ Prerrequisitos
 
-1. **Clonar el repositorio:**
-   ```bash
-   git clone [https://github.com/JohnCharly05/sistema-gestion-biblioteca.git](https://github.com/JohnCharly05/sistema-gestion-biblioteca.git)
+Sigue atentamente estos pasos para poder ejecutar este entorno de manera local en tu computadora sin errores de compilación ni de conexión.
+
+### 📋 Prerrequisitos
+* **Java Development Kit (JDK):** Versión 17 o superior instalada.
+* **Gestor de Base de Datos:** MySQL Server (ya sea nativo, mediante XAMPP o MySQL Workbench).
+* **Entorno de Desarrollo (IDE):** NetBeans IDE (o cualquier IDE compatible con proyectos Java Ant).
+
+### 🛠️ Guía de Configuración Paso a Paso
+
+**1. Clonar el repositorio:**
+```bash
+git clone [https://github.com/JohnCharly05/sistema-gestion-biblioteca.git](https://github.com/JohnCharly05/sistema-gestion-biblioteca.git)
+```
+
+**2. Configurar la Base de Datos en MySQL**
+* Abre tu gestor de base de datos preferido (MySQL Workbench, phpMyAdmin, etc.).
+* Crea una nueva base de datos vacía llamada exactamente `LIBRERIA`.
+* Importa y ejecuta el script de base de datos `LIBRERIA.sql` que se encuentra en la raíz de este repositorio para construir automáticamente todas las tablas, relaciones e inventario inicial.
+
+**3. Configurar Credenciales de Conexión en el Código**
+* Abre el proyecto dentro de NetBeans IDE.
+* En el explorador de proyectos de la izquierda, navega por la ruta: `Source Packages` -> `com.login` y abre el archivo `Conexion.java`.
+* Modifica las variables de conexión colocándole tu usuario y tu contraseña local de acceso a MySQL:
+
+```java
+static String url = "jdbc:mysql://localhost:3306/LIBRERIA";
+static String user = "TU_USUARIO_DE_MYSQL";     // Por defecto suele ser "root"
+static String pass = "TU_CONTRASENA_DE_MYSQL";  // Coloca aquí tu contraseña local
+```
+
+**4. Compilar y Ejecutar**
+* **Librerías incluidas:** No requieres descargar conectores adicionales. Las dependencias indispensables (`mysql-connector-j` para la base de datos e `iText` para la edición de documentos) ya vienen preconfiguradas e integradas de forma relativa dentro de la ruta del proyecto en `src/lib/`.
+* **Ejecución:** Haz clic derecho sobre el nodo raíz del proyecto en NetBeans y selecciona **Clean and Build** (Limpiar y Construir). Una vez terminado el proceso con éxito, haz clic en **Run** (Ejecutar) en la clase `Login.java`.
+
+---
+
+## 📄 Nota sobre los Comprobantes en PDF
+Al concluir operaciones críticas dentro del sistema (como el corte de caja o el proceso de ventas), la aplicación genera un ticket formal en formato PDF de manera automatizada. 
+
+Gracias al uso de propiedades dinámicas del entorno (`System.getProperty("user.home")`), el archivo final se guardará directamente en el directorio principal de tu usuario activo en el sistema operativo, garantizando una portabilidad absoluta e inmediata sin importar si ejecutas el sistema desde entornos Windows, Linux o macOS.
